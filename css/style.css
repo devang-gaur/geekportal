@@ -1,0 +1,242 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 24, 2015, 4:49:01 AM
+    Author     : DEVANG GAUR
+*/
+
+body{
+    background-color: green;
+    text-align : center;
+}
+
+
+#wrapper{
+    width : 900px;
+    margin : 0 auto;
+}
+
+#content{
+    background-color: #fff;
+    border : 1px solid #000;
+    float : left;
+    font-family: Arial;
+    padding : 20px 30px;
+    text-align: left;
+    width : 95%;
+    
+}
+
+#header{
+ width: 100%;
+ background-color:  darkgreen;
+ position: absolute;
+ border:1px solid #000;
+}
+
+
+.menu{
+    float: left;
+    
+    border-bottom:none;
+    clear : both;
+    width : 95%;
+    //height :px;
+    padding :0 30px;
+    background-color: darkgreen;
+    color: white;
+    text-align: left;
+    font-size: 85%;
+    position: initial;
+    margin-bottom: 30px;
+}
+
+.menu h1{
+    color: white;
+}
+.menu a:hover{
+    background-color: forestgreen;
+}
+
+.menu #menubar ul li{
+    display: inline-block;
+    list-style: none;
+    
+}
+
+#userbar{
+    background-color: #F0F0F0;
+    border-radius: 2px;
+    float: right;
+    font-size: 14px;
+    
+    color: darkgreen;
+    min-width: min-content;
+    border: #000 1px solid;
+    margin: 5px 20px 10px 5px;
+}
+
+#userbar li{
+    color : darkgreen;
+    list-style: none;
+}
+
+#userbar li:hover #user-choice{
+    background: #1a1a1a;
+    z-index:1;
+    opacity:1;
+}
+
+#user-choice{
+    border: #000 solid 2px;
+    width:160%;
+    padding:5px 0px;
+    position:absolute;
+    top:100%;
+    left:0px;
+    z-index:-1;
+    opacity:0;
+    transition:opacity linear 0.15s;
+    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+    background:#FFF;
+}
+
+#user-choice li{
+    list-style: none;
+    display: block;
+    font-size: 14px;
+}
+
+#user-choice li:hover{
+    background: #999999;
+}
+
+#user-choice li a {
+    padding:10px 30px;
+    display:block;
+}
+ 
+
+#footer{
+    clear: both;
+}
+
+
+/*  table styles */
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table a{
+    color:#000;
+}
+
+table a:hover{
+    color :#000;
+}
+
+th{
+    background-color: green;
+    color: #F0F0F0;
+    text-align: center;
+}
+
+td{
+    padding: 5px;
+    text-align: center;
+}
+
+/* Begin font styles */
+
+h1{
+    font-family: Arial;
+    color: forestgreen;
+}
+
+h3{
+    margin: 3% 50px 2% 10%;
+    padding : 0;
+}
+
+/*  Menu Styles */
+.item{
+    background-color: #00728B;
+    border : 1px solid #0324272;
+    color: #FFF;
+    font-family: Arial;
+    padding : 3px;
+    
+}
+
+.leftpart{
+    width: 70%;
+}
+
+.rightpart{
+    width: 30%;
+}
+
+.small{
+    fontsize: 75%
+}
+
+ #footer{
+    font-size: 65%;
+    padding: 3px 0 0 0;
+    width:100%;
+    height:100px;
+    background:darkgreen;
+    position: initial;
+    bottom:0;
+    left:0;
+    font-family: Arial;
+    color: white;
+
+}
+
+
+
+.topic-post{
+ height: 100px;
+ overflow: auto;
+}
+
+.post-content{
+    padding: 30px;
+}
+
+textarea {
+    alignment-adjust: central;
+    background-color: #F0F0F0;
+    border: #000 0.5px solid;
+    border-radius: 5px;
+    width: 500px;
+    height:200px;
+    margin: 5px 5px 0px 0px;
+}  
+input{
+    alignment-adjust: central;
+    background-color: #F0F0F0;
+    border: #000 0.5px solid;
+    border-radius: 2px;
+    width: 200px;
+    margin: 5px 5px 30px 20px;
+}
+
+select{
+    alignment-adjust: central;
+    background-color: #F0F0F0;
+    border: #000 0.5px solid;
+    border-radius: 2px;
+    width: 200px;
+    margin: 5px 5px 30px 20px;
+}
+
+.filler{
+    alignment-adjust: central;
+    margin: 50px 100px 40px 400px;
+}
