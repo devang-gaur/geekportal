@@ -5,13 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$server="localhost";
+$server="ap-cdbr-azure-east-c.cloudapp.net";
 
-$database="forumdb";
+$database="DefaultMySQL";
 
-$username="root";
+$username="bd4d0820ca880e";
 
-$password="";
+$password="ce5fd6a6";
 
 $connect=mysql_connect($server, $username, $password) or die("Could not connect to the server!");
 
