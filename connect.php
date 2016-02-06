@@ -5,17 +5,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$server="ap-cdbr-azure-east-c.cloudapp.net";
+$server="ap-cdbr-azure-southeast-b.cloudapp.net";
 
-$database="DefaultMySQL";
+$database="forumdb";
 
-$username="bd4d0820ca880e";
+$username="b53a04417753d1";
 
-$password="ce5fd6a6";
+$password="c4ba95dc";
 
 $connect=mysql_connect($server, $username, $password) or die("Could not connect to the server!");
 
-mysql_selectdb($database,$connect) or die("Couldn't connect to the database :'.$database");
+mysql_selectdb($database,$connect) or die("Couldn't connect to the database : $database");
 
     
 ?>
