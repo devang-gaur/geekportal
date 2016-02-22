@@ -15,12 +15,17 @@ error_reporting(E_ERROR | E_PARSE); ?>
         <meta property="og:description" content="Discuss your issues.Resolve your queries. " />
         
         <title>GreetTheGeeks!</title>
-        <script type="text/javascript" src="js/jquery.js"></script>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		        <!-- <script type="text/javascript" src="js/jquery.js"></script> -->
 	<script type="text/javascript" src="js/accordion.js"></script>
         <link rel=stylesheet href="css/style.css" />
         <link rel=stylesheet href="css/accordionstyle.css" />
-        <!--<link rel=stylesheet href="css/jquery-ui.css" />-->
-        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+        <link rel=stylesheet href="css/jquery-ui.css" />
+        <!-- <link rel="stylesheet" href="css/jquery.min.css" /> -->
     </head>
     <body>
             <div class="wrapper">

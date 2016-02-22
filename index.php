@@ -3,7 +3,7 @@ include 'header.php';
 include 'connect.php';
 ?>
 <script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery.mobile-1.4.5.min.js"></script>
+<!-- <script src="js/jquery.mobile-1.4.5.min.js"></script> -->
 
 <style>
 .feed-description{
@@ -37,11 +37,6 @@ hr{
     margin: 30px 20px 30px 20px; 
 }
 </style>
-<script>
-    
-//var article_heads;    
-    
-</script>
 
         <div data-role="popup" id="myPopDiv" class="ui-btn ui-btn-inline ui-corner-all" data-theme="a" data-overlay-theme="b">
             <iframe src="" width="700" height="600" seamless></iframe>
