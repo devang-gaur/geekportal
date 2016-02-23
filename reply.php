@@ -18,16 +18,16 @@ else
     mysql_query("BEGIN WORK");
     if(!$_SESSION['signed_in'])
     {
-        echo "You have to <a href='sign_in.php'>sign first</a> in to post a reply.";
+        echo "You have to <a href='sign_in.php'>sign first</a> in to post your reply.";
     }
     else
     {
         $content=  addslashes($_POST['reply-content']);
         $date=addslashes(date("Y-m-d H:i:s"));
-        $id=$_POST['cat-id'];
+        $post_id=$_POST['post-id'];
         $uid=$_SESSION['user_id'];
         
-        $sql="INSERT INTO posts(post_content,post_date,post_topic,post_by) VALUES('$content','$date',$id,$uid)";
+        $sql="INSERT INTO posts(reply_content,reply_date,post,user) VALUES( '$content', '$date', $post_id, $uid )";
         
         $result=  mysql_query($sql);
         
@@ -39,6 +39,7 @@ else
         else 
         {
             mysql_query("ROLLBACK");
+            redirect("topic.php?id=$id");
         }
     }
 }
