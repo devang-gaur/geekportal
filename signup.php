@@ -31,7 +31,7 @@ else
 
  if(isset($_POST['user_name'])&&  $_POST['user_name']!="")
  {
-     if(!ctype_alnum($_POST[user_name]))
+     if(!ctype_alnum($_POST['user_name']) || !ctype_lower($_POST['user_name']))
      {
          $errors[]="The username should only contain alphabets and numbers.";
      }
@@ -98,37 +98,39 @@ Profile-picture(optional) :<input type="file" accept="image/*" name="user_pic" /
 </form>
 <?php
  }
- else
- {
-     //The form has been posted.
-     //Entering for the new user in the database.
-     
-     if($dp_set)
-     {
-        $info = pathinfo($_FILES['user_pic']['name']);
-        $ext = $info['extension']; // get the extension of the file
-        $newname = $_SESSION['user_id']."_dp.".$ext;
-        $target = 'res/'.$newname;
-        move_uploaded_file( $_FILES['user_pic']['tmp_name'], $target);
-     }
-     else
-     {
-         $target='res/default_dp.jpg';
-     }
-     $u_lvl=0;
-     $query="INSERT INTO forumdb.users(user_name,user_pass,user_email,user_date,user_level,user_dp) values('".mysql_real_escape_string($_POST['user_name'])."','".md5($_POST['user_pass'])."','".mysql_real_escape_string($_POST['user_email'])."','".  addslashes(date("Y-m-d H:i:s"))."','$u_lvl','".addslashes($target)."') ";
-     //echo $query;
-     $result= mysql_query($query);
-     
-     if(!$result)
-     {
-         echo "Something went wrong while registration!Try again.";
-     }
-     else
-     {
-         ?> Successfully registered.You can now <a href="sign_in.php">sign in</a> and start posting. <?php
-     }
- }
+    else
+    {
+        //The form has been posted.
+        //Entering for the new user in the database.
+        
+        if($dp_set)
+        {
+            $info = pathinfo($_FILES['user_pic']['name']);
+            $ext = $info['extension']; // get the extension of the file
+            $newname = $_SESSION['user_id']."_dp.".$ext;
+            $target = 'res/'.$newname;
+            move_uploaded_file( $_FILES['user_pic']['tmp_name'], $target);
+        }
+        else
+        {
+            $target='res/default_dp.jpg';
+        }
+
+        $u_lvl=0;
+        $query="INSERT INTO forumdb.users(name, pass, email, date, level, dp) values('".mysql_real_escape_string($_POST['user_name'])."','".md5($_POST['user_pass'])."','".mysql_real_escape_string($_POST['user_email'])."','".  addslashes(date("Y-m-d H:i:s"))."','$u_lvl','".addslashes($target)."') ";
+
+
+        $result= mysql_query($query);
+
+        if(!$result)
+        {
+             echo "Something went wrong while registration!Try again.";
+        }
+        else
+        {
+            ?> Successfully registered.You can now <a href="sign_in.php">sign in</a> and start posting. <?php
+        }
+    }
 }
 echo '</div>';
 ?>
