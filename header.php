@@ -49,7 +49,10 @@ function redirect($url)
 
 
                 <div id="header" >
+
+
                 <div id="menu" class="container">
+
                 <div class="row">
 
                 <div class="col-sm-9">
@@ -61,7 +64,7 @@ function redirect($url)
                 {
                 ?>
 
-                    <?php if($_SESSION['user_level']==1) { ?>
+                    <?php if($_SESSION['user_level']== ADMIN_USER) { ?>
 
                          <li><a class="item" href="create_category.php">New Category</a></li>
 
@@ -79,16 +82,16 @@ function redirect($url)
 
 <?php
 
-                 if($_SESSION['signed_in']==TRUE){ ?>
+                 if( $_SESSION['signed_in'] ){ ?>
 
                             <li class="dropdown">
-                                <button class="dropdown-toggle btn " data-toggle="dropdown">
+                                <label class="dropdown-toggle btn" data-toggle="dropdown">
                                 <img class="dp-thumbnail"  src=<?php echo $_SESSION['user_dp'] ?> />
                                 <?php echo $_SESSION['user_name']; ?><span class="caret"></span>
-                                </button>
+                                </label>
 
                                 <ul id="user-choice" class="dropdown-menu">
-                                    <li><a href=<?php echo "changedetails.php?id=".$_SESSION['user_id']; ?>>Change details</a></li>
+                                    <li><a href=<?php echo "updatedetails.php"; ?>>Change details</a></li>
                                     <li><a href="sign_out.php">Sign out</a></li>
                                 </ul>
                             </li>
@@ -108,11 +111,14 @@ function redirect($url)
                 </div><!-- column ends -->
             </div><!-- row ends -->
                 </div><!-- menu ends -->
+                </div><!-- header ends -->
+
+
             <div class="wrapper">
 
+
 <?php if(''.$_SERVER['SCRIPT_NAME'].'' == addslashes($config['url']."/index.php")){ ?>
-            <!--<div class="container">-->
-            <header>
+
 
                 <div class="jumbotron">
 
