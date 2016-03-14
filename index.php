@@ -1,150 +1,169 @@
-<?php 
+<?php
 include 'header.php';
 include 'connect.php';
 ?>
-<script src="js/jquery-1.11.3.min.js"></script>
-<!-- <script src="js/jquery.mobile-1.4.5.min.js"></script> -->
 
 <style>
-.feed-description{
-   
-	font-size : 65%; 
+
+.cat-display, .topic-display{
+    text-align: center;
+    margin-top: 40px;
 }
-.feed-description img { 
+
+.feed-description{
+    font-size : 65%;
+}
+.feed-description img {
     margin-left: 250px;
     float: bottom;
     clear: both;
 }
 
 .feed:hover{
-	background-color: cadetblue;
+    background-color: rgba(240, 240, 240, 0.3);
+    cursor: pointer;
 }
-.feed-description{
-//float: left;
-//clear :right;
-}
-#sd-desc{
 
-}
-#sd-desc img{
-//	display : none;
-}
 hr{
     margin-bottom: 10px;
     margin-top: 10px;
 }
-#table-div{
-    margin: 30px 20px 30px 20px; 
-}
+
+
 </style>
 
-        <div data-role="popup" id="myPopDiv" class="ui-btn ui-btn-inline ui-corner-all" data-theme="a" data-overlay-theme="b">
-            <iframe src="" width="700" height="600" seamless></iframe>
+        <div data-role="popup" id="myPopDiv" class="modal fade ui-btn ui-btn-inline ui-corner-all"  role="dialog" data-theme="a" data-overlay-theme="b" >
+
+            <div class="modal-dialog" >
+
+            <div class="modal-content" >
+
+            <div class="modal-body">
+                <iframe src="" width="700" height="600" seamless></iframe>
+            </div>
+
+            </div>
+
+            </div>
         </div>
 
-		<div class="accordion">
-                    <!-- Techcrunch feed div-->
-			<div class="accordion-section">
+        <div class="accordion">
+
+            <!-- Techcrunch feed div-->
+            <div class="accordion-section">
                             <div  class="accordion-section-title" id="accordion-1" >TechCrunch</div>
-				<div id="accordion-1" class="accordion-section-content" >
-	
+                <div id="accordion-1" class="accordion-section-content" >
+
                                 </div><!--end .accordion-section-content-->
-			</div><!--end .accordion-section-->
+            </div><!--end .accordion-section-->
 
-                        <!-- BBC-Tech feed div-->
-			<div class="accordion-section">
-                            <div  class="accordion-section-title" id="accordion-2" name="bbc" >BBC-tech</div>
-				<div id="accordion-2" class="accordion-section-content" name="bbc_content">
+            <!-- BBC-Tech feed div-->
+            <div class="accordion-section">
+                <div  class="accordion-section-title" id="accordion-2" name="bbc" >BBC-tech</div>
+                <div id="accordion-2" class="accordion-section-content" name="bbc_content">
 
-				</div><!--end .accordion-section-content-->
-			</div><!--end .accordion-section-->
-
-                        <!-- Digit feed div-->
-                        <div class="accordion-section">
-                            <div  class="accordion-section-title" id="accordion-3" name="digit" >Digit</div>
-				<div id="accordion-3" class="accordion-section-content" name="digit_content">
-				</div><!--end .accordion-section-content-->
-			</div><!--end .accordion-section-->
-                        
-                        
-                        <!-- Sciencedump feed div-->
-                        <div class="accordion-section">
-                            <div  class="accordion-section-title" id="accordion-4" name="sciencedump" >Apple Insider</div>
-				<div id="accordion-4" class="accordion-section-content" name="sciencedump_content">
-
-				</div><!--end .accordion-section-content-->
-			</div><!--end .accordion-section-->
-                        
-                        <!-- Android Authority feed div-->
-                        <div class="accordion-section">
-                            <div  class="accordion-section-title" id="accordion-5" name="androidauthority">Android Authority</div>
-				<div id="accordion-5" class="accordion-section-content" name="androidauthority_content">
-
-				</div><!--end .accordion-section-content-->
-			</div><!--end .accordion-section-->
-                        
-		</div><!--end .accordion-->
+                </div><!--end .accordion-section-content-->
+            </div><!--end .accordion-section-->
 
 
-<script type="text/javascript" src="js/rssfeeder.js"></script>                    
-<script type="text/javascript" src="js/popArticle.js"></script>
+            <!-- Digit feed div-->
+            <div class="accordion-section">
+                <div  class="accordion-section-title" id="accordion-3" name="digit" >Digit</div>
+
+                <div id="accordion-3" class="accordion-section-content" name="digit_content">
+
+                </div><!--end .accordion-section-content-->
+            </div><!--end .accordion-section-->
+
+
+            <!-- Sciencedump feed div-->
+            <div class="accordion-section">
+                <div  class="accordion-section-title" id="accordion-4" name="sciencedump" >Apple Insider</div>
+
+                <div id="accordion-4" class="accordion-section-content" name="sciencedump_content">
+
+                </div><!--end .accordion-section-content-->
+            </div><!--end .accordion-section-->
+
+            <!-- Android Authority feed div-->
+            <div class="accordion-section">
+                <div  class="accordion-section-title" id="accordion-5" name="androidauthority">Android Authority</div>
+
+                <div id="accordion-5" class="accordion-section-content" name="androidauthority_content">
+
+                </div><!--end .accordion-section-content-->
+            </div><!--end .accordion-section-->
+
+        </div><!--end .accordion-->
+
+
+<script type="text/javascript" src="js/rssfeeder.js"></script>
 <script type="text/javascript" src="js/popup_util.js"></script>
-<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>-->
-<!--<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.ui/1.8.6/jquery-ui.min.js"></script>-->
+
 <?php
 
-$sql="SELECT cat_id,cat_name,cat_description FROM categories";
+$sql="SELECT categories.id,categories.name,categories.description FROM categories ORDER BY categories.last_update desc";
 
 $result=  mysql_query($sql);
-echo '<div id="table-div">';
 if(!$result)
 {
     echo "<div><p>The categories could not be displayed, try again.</p></div>";
 }
 else
 {
-    if(mysql_num_rows($result)==0)
+    $num_rows = mysql_num_rows($result);
+
+    if($num_rows == 0)
     {
         echo 'No categories defined yet.<a href="create_category.php">Create</a> one?';
     }
     else
     {
 ?>
-        <table border="1px">
-        <tr>
-        <th>Category</th>
-        <th>Last topic</th>
-        </tr>     
+        <div class="container" style="margin-top: 60px">
 
 <?php
+        $row_ctr=1;
         while($rows =  mysql_fetch_assoc($result))
         {
+            if( (($row_ctr - 1) % 2) == 0 ){
+                echo "<div class='row'>";
+            }
+
 ?>
-<tr>
-    <td class="leftpart">
-        <h3><a href="category.php?id=<?php echo $rows['cat_id']; ?>"><?php echo $rows['cat_name']; ?></a></h3><?php echo $rows['cat_description']; ?>
-    </td>
-    <td class='rightpart'>
+
+    <div class="col-md-6 cat-display">
+        <h4><a href="category.php?id=<?php echo $rows['id']; ?>"><?php echo $rows['name']; ?></a></h4>
+        <?php echo $rows['description']; ?>
+
+
         <?php
-        
-            $topic_sql="SELECT topic_id,topic_subject,topic_date,topic_cat FROM topics WHERE topic_cat=".$rows['cat_id']." ORDER BY topic_date desc LIMIT 1";
+
+            $topic_sql="SELECT topics.id,topics.subject,topics.date,topics.cat FROM topics WHERE topics.cat=".$rows['id']." ORDER BY topics.date desc LIMIT 1";
+
             $topic_result=mysql_query($topic_sql);
-            
-        if(mysql_num_rows($topic_result)==0)
+        echo "<span class='topic-display'>";
+        if( mysql_num_rows($topic_result)==0)
         {
-            echo 'No topics yet.';
+            echo '<h5>No topics yet.</h5>';
         }
         else
-        { 
+        {
             $topic_row= mysql_fetch_assoc($topic_result);
             ?>
-            <a href="topic.php?id=<?php echo $topic_row['topic_id']; ?>"><b><?php echo $topic_row['topic_subject']; ?></b></a><br />(<?php echo $topic_row['topic_date']; ?>) 
-  <?php } ?>
-     </td>
-</tr>
+
+            <a href="topic.php?id=<?php echo $topic_row['id']; ?>"><h5><?php echo $topic_row['subject']; ?></h5></a>(<?php echo $topic_row['date']; ?>)
+  <?php }
+            echo '</div><!-- column ends -->';
+            if( ($row_ctr % 2) == 0 || ($row_ctr == $num_rows) ){
+                echo "</div> <!-- row ends -->";
+            }
+?>
 <?php
+            $row_ctr++;
         }
-        echo '</table></div>';
+        echo '</span>';
+        echo '</div> <!-- container ends! -->';
     }
 }
 
