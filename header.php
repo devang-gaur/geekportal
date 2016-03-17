@@ -1,13 +1,15 @@
 <?php
-require_once 'config.php';
-session_start();
+require_once('config.php');
+
+require_once('utility.php');
+
+if(!session_id())
+{
+    session_start();
+}
+
 error_reporting(E_ERROR | E_PARSE);
 
-function redirect($url)
-{
-    header('location:'.$url);
-    exit();
-}
 
 ?>
 <!DOCTYPE html>
@@ -127,6 +129,6 @@ function redirect($url)
                 </div><!-- header ends -->
 
 
-            </div>
+
  <?php } ?>
             <div id="content" class="container" >
