@@ -1,19 +1,15 @@
 <?php
 
-$config['server'] = 'localhost';
-//$server="ap-cdbr-azure-east-c.cloudapp.net";
+error_reporting(E_ERROR | E_PARSE);
 
-$config['db'] = 'forumdb'; 
-//$database="DefaultMySQL";
+$config['server'] = ''; //Enter your server url . eg, localhost
 
-$config['user'] = 'root' ;
-//$username="bd4d0820ca880e";
+$config['db'] = ''; //Enter your dedicated database for the application
 
-$config['pass'] = '';
-//$password="ce5fd6a6";
+$config['user'] = '' ; //Enter the db admin password. Eg. 'root'
 
-$config['url'] = '/geekportal';
+$config['pass'] = ''; //Enter the db admin password .
 
-define('ADMIN_USER', 1);
+$config['url'] = ''; //Enter the url of the project from root domain. Eg. /geekportal
 
-define('USER', 0);
+
