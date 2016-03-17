@@ -37,11 +37,12 @@ class User
         *   'email' => '' ,
         *   'dp' => 'res/default_dp.jpg' ,
         *   'level' => 0 ,
-        *   'clef' => '' ,
+        *   'signup' => 0 ,
+        *   'clef' => '' 
         * )
         */
 
-        function insert_user ( $user = array() , $make_admin = NO ){
+        function insert_user ( $user = array() ) {
 
             $sql = "INSERT INTO users ( name , pass , email , dp , level , signup , clef ) VALUES ( :name , :pass , :email , :dp , :level , CURRENT_TIMESTAMP() , :clef )";
 
@@ -69,7 +70,7 @@ class User
 
                 $statement->bindparam(':clef' , $user['clef'] );
 
-                $statement->bindparam(':level' , $make_admin );
+                $statement->bindparam(':level' , $user['level'] );
 
                 $statement->execute();
 
@@ -85,43 +86,99 @@ class User
 
 
 
-        function update_user ( $fields = array() , $params = array() ){
+        function update_user ( $params = array(), $fields = array(), $param_op = 'AND' ) {
 
             $sql = "UPDATE users SET ";
 
             foreach ($fields as $key => $value) {
-                $sql .= "$key = '$value' ";
+                $sql .= "$key = '$value', ";
             }
 
-            $sql .= "WHERE ";
+            $sql = chop( $sql, ", ");
+
+            $sql .= " WHERE ";
 
             foreach ($params as $key => $value) {
-                $sql .= "$key = '$value' ";
+                $sql .= "$key = '$value' $param_op ";
             }
-            echo $sql;
+            $sql = chop( $sql, "$param_op ");
             try {
                 $this->conn->beginTransaction();
+                $this->conn->quote( $sql );
                 $this->conn->exec( $sql );
                 $this->conn->commit();
 
             } catch ( PDOException $e ) {
                 echo $e->getMessage();
                 $this->conn->rollBack();
-//                redirect("../updatedetails.php?err=1");
+                redirect("../updatedetails.php?err=1");
             }
 
         }
 
 
+        function select_user ( $params = array(), $fields= array(), $param_op = 'AND' ) {
 
+            $sql = "SELECT ";
+
+            if( count($fields) == 0 ){
+                $sql .= "*";
+            }
+
+            foreach ($fields as $field) {
+                $sql .=" $field, ";
+            }
+            $sql = chop( $sql, ", ");
+
+            $sql .= " FROM users WHERE ";
+ 
+            foreach ($params as $key => $value) {
+                $sql .= "$key = '$value' $param_op ";
+            }
+
+            $sql = chop( $sql, "$param_op ");
+
+            try{
+                $this->conn->quote( $sql );
+                $statement = $this->conn->query( $sql );
+                $result = $statement->fetchAll( PDO::FETCH_ASSOC );
+                
+                return $result;
+
+            } catch ( PDOException $e ){
+                echo $e->getMessage();
+            }
+        }
+
+        function delete_user ( $params = array() , $param_op = 'AND' ){
+            $sql = "DELETE FROM users WHERE ";
+
+            foreach ($params as $key => $value) {
+                $sql .= "$key = '$value' $param_op ";
+            }
+
+            $sql = chop( $sql , "$param_op " );
+
+            try{
+                $this->conn->beginTransaction();
+                $this->conn->quote( $sql );
+                $this->conn->exec( $sql );
+                $this->conn->commit();
+
+            } catch ( PDOException $e ) {
+                echo $e->getMessage();
+                $this->conn->rollBack();
+            }
+        }
 
 }
 
+/*
 var_dump($config);
 
 $user = new User( $config );
 
-/*
+
 $u = array (
     'name' => 'bulla',
     'email' => 'bulla@gunda.com' ,
@@ -132,12 +189,11 @@ $u = array (
     'clef' => ''
     ); 
 */
-
-$user->update_user(
-    array( 'name' => 'bullaji' ), 
-    array(    'email' => 'bulla@gunda.com' ) 
+/*
+$user->delete_user(
+    array(  'id' => '12' , 'level' => 0 ) 
     );
     
 echo "yay";
-
+*/
 ?>
