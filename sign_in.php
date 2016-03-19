@@ -10,11 +10,12 @@ require_once('generate_state.php');
 if( isset($_SESSION['signed_in']) && $_SESSION['signed_in'] ){
     redirect('index.php');
 }
-/*
+
 if( session_id() ){
   session_unset();
   session_destroy();
-}*/
+}
+
 include 'connect.php';
 ?>
 
