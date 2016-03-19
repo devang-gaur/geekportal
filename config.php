@@ -2,23 +2,23 @@
 
 error_reporting(E_ERROR | E_PARSE);
 
-$config['server'] = 'localhost';
-//$server="ap-cdbr-azure-east-c.cloudapp.net";
+$config['server'] = ''; //Enter your server url . eg, localhost
 
-$config['db'] = 'forumdb'; 
-//$database="DefaultMySQL";
+$config['db'] = ''; //Enter your dedicated database for the application
 
-$config['user'] = 'root' ;
-//$username="bd4d0820ca880e";
+$config['user'] = '' ; //Enter the db admin password. Eg. 'root'
 
-$config['pass'] = '';
-//$password="ce5fd6a6";
+$config['pass'] = ''; //Enter the db admin password .
 
-$config['url'] = '/geekportal';
+$config['url'] = ''; //Enter the url of the project from root domain. Eg. /geekportal
+
+$config['site_name'] = 'GreetTheGeeks'; //Change this name to your own site name. Keep it small.
+
+$config['site_desc'] = 'Your daily doze of tech.'; //Change this description accordingly. Keep it small.
 
 
-define( 'CLEF_ID' , 'c12a8d357a9f97f681a694f6dacbdd9d' );
+define( CLEF_ID , '' ); // Enter your CLEF APP ID .
 
-define( 'CLEF_SECRET' , '5da953baa5d5c59315c3fe03695523c8' );
+define( CLEF_SECRET , '' ); // Enter your CLEF APP SECRET
 
-define( 'CLEF_URL' , 'http://localhost/geekportal/clef.php' );
+define( CLEF_URL , '' );// Enter the complete url to clef.php file . Eg.'http://localhost/clef/sample-php/clef.php'

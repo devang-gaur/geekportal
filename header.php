@@ -15,7 +15,7 @@ error_reporting(E_ERROR | E_PARSE);
 <!DOCTYPE html>
 <html>
     <head>
-        <title>GreetTheGeeks!</title>
+        <title><?php echo $config['site_name']; ?></title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="description" content="Your forum for daily tech!" />
@@ -124,7 +124,7 @@ error_reporting(E_ERROR | E_PARSE);
 
                 <div class="jumbotron">
 
-                <h1>GreetTheGeeks<small>Your daily doze of tech.</small></h1>
+                <h1><?php echo $config['site_name']; ?><small><?php echo $config['site_desc']; ?></small></h1>
 
                 </div><!-- header ends -->
 
