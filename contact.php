@@ -17,7 +17,7 @@ include 'connect.php';
     <form method="post">
         <input type="hidden" name="" value=<?php echo $_SESSION['user_name']; ?>>
         Message:<br /><textarea name="message"></textarea><br /><br /><br />
-        <input type="submit" value="Send"/>
+        <input type="submit" class="btn btn-default" value="Send"/>
     </form>
 </div>
 <?php

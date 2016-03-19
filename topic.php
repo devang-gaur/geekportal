@@ -6,18 +6,61 @@
     .post-div{
         border:   black  solid 1px;
         border-radius: 10px;
-        background-color: #F0F0F0;
+        background-color: #E0D8E0;
         width: 600px;
         min-height: 60px;
         
         margin: 10px 20px 10px 60px;
+    }
+    
+    .reply-div{
+        border:   black  solid 1px;
+        border-radius: 2px;
+        background-color: #F0F0F0;
+        width: 400px;
+
+        min-height: 40px;
+        margin: 10px 20px 10px 160px;
+    }
+    
+    .add-post-div{
+        width: 600px;
+        min-height: 60px;
+        
+        margin: 50px 20px 10px 60px;
+    }
+    
+    .add-reply-div{
+    	width: 400px;
+        
+        min-height: 40px;
+        /*max-height: 50px;*/
+        margin: 10px 20px 10px 260px;
+    }
+    
+    .add-post-div textarea{
+    	background : white;
+    	max-height: 60px;
+    }
+    
+    .add-reply-div textarea{
+    	background : white;
+    	max-height: 40px;
     }
 
     .post-content{
         margin: 5px 10px 5px 10px;
     }
     
+    .reply-submit{
+    	background : black;
+    	text-decoration-color : white;
+    }
     
+    .post-submit{
+    	background : black;
+    	text-decoration-color : white;
+    }
 </style>
 
 
@@ -26,15 +69,11 @@ include 'header.php';
 include 'connect.php';
 ?>
 <?php
-//echo $_SERVER['SCRIPT_NAME'];
-function redirect($url)
-{
-    header('location:'.$url);
-    exit();
-}
 
 $id=  mysql_real_escape_string($_GET['id']);
-$sql="SELECT topic_id,topic_subject,topic_by,topic_date FROM topics WHERE topics.topic_id='$id'";
+
+$sql="SELECT topics.id as t_id ,topics.subject,topics.user,topics.date,users.name FROM topics LEFT JOIN users ON 
+    topics.user = users.id WHERE topics.id='$id'";
 
 
 $result=  mysql_query($sql);
@@ -52,88 +91,100 @@ if(!$result)
     else
     {
         $row=mysql_fetch_assoc($result);
-        $created_by_id=$row['topic_by'];
-        $time = strtotime($row['topic_date']);
+        $time = strtotime($row['date']);
         $myFormatForView = date("m/d/y g:i A", $time);
-        $q="SELECT user_name from users where user_id=$created_by_id";
-        $r=  mysql_query($q);
-        $rw=mysql_fetch_assoc($r);
         
-        echo '<h5>'.$row['topic_subject'].'</h5><br />'.'Created by :'.$rw['user_name'].' at :'.$myFormatForView.'<hr />';
+        echo '<h4>'.$row['subject'].'</h4><br />'.'Created by :'.$row['name'].' at :'.$myFormatForView.'<hr />';
 
-        $sql="SELECT posts.id , posts.post_topic,posts.post_content,posts.post_date,posts.post_by,users.user_id,users.user_name FROM posts LEFT JOIN users ON posts.post_by = users.user_id WHERE posts.post_topic ='$id'";
-        $result=  mysql_query($sql);
-        
-        if(!$result)
+        $post_sql="SELECT posts.id as p_id , posts.topic,posts.content,posts.date,posts.user,users.id as u_id,users.name FROM posts LEFT JOIN users ON posts.user = users.id WHERE posts.topic ='$id'";
+
+        $post_result=  mysql_query($post_sql);
+        $post_result;
+        if(!$post_result)
         {
             echo "Couldn't display the posts. Try again.";
         }
         else
         {
-            if(mysql_num_rows($result)==0)
+            if(mysql_num_rows($post_result)==0)
             {
                 echo 'No posts to display.';
             }
             else
             {
-                while ( $row = mysql_fetch_assoc($result) )
-                { 
-                    $u_id=$row['post_by'];
-                    $post_id = $row['post_id'];
+                while ( $row = mysql_fetch_assoc($post_result) )
+                {
+                    $post_id = $row['p_id'];
                     
-                    $u_query="SELECT user_name FROM users WHERE user_id=$u_id";
-                    $u_result= mysql_query($u_query);
-                    $u_row=  mysql_fetch_assoc($u_result);
-                    
-                    $u_name=$u_row['user_name'];
+                    $u_name=$row['name'];
 ?> 
 <div>
 	<div class="post-div">
 	    <top>
-	        <div class="post-content"><?php echo htmlentities(stripslashes($row['post_content'])); ?></div>
+	        <div class="post-content"><?php echo htmlentities(stripslashes($row['content'])); ?></div>
 	    </top>
 	    <bottom>
-	        <div class="credit" align="right">posted by <span class="username"><?php echo $u_name; ?></span> at <span class="date"><?php  echo date('d-m-Y H:i', strtotime($posts_row['post_date'])); ?></span></div>
-	    </bottom>
-	</div>
-<?php	
-	$reply_query = "SELECT reply_id , reply_content , reply_ FROM replys WHERE post = $post_id ORDER BY reply_date asc";
-	$reply_result = mysql_query($reply_query);
-	
-	while($reply_row = mysql_fetch_assoc(	$reply_result )){
-	
-	var_dump($reply_row);
-?>	
+	        <div class="credit" align="right">posted by <span class="username"><?php echo $u_name; ?></span> at <span class="date"><?php  echo date('d-m-Y H:i', strtotime($row['date'])); ?></span>
+            <?php if( $_SESSION['user_level'] == ADMIN_USER ){ ?>
+            <a href=<?php echo "delete_post.php?id=$post_id"; ?> ><span class='glyphicon glyphicon-remove'></span></a>
+            <?php } ?>
+            </div>
+        </bottom>
+    </div>
+<?php
+					$reply_sql = "SELECT replys.id , replys.content , replys.user , users.name FROM replys LEFT JOIN users ON replys.user = users.id WHERE post = $post_id ORDER BY replys.date asc";
+					
+					$reply_result = mysql_query($reply_sql);
+					
+					while($reply_row = mysql_fetch_assoc($reply_result )){
+                        $reply_id = reply_row['id'];
+?>
 	<div class = "reply-div" >
 		<top>
-			<div class = "reply-content" ><?php echo htmlentities(stripslashes($reply_row['reply_content'])); ?></div>
+			<div class = "reply-content" ><?php echo htmlentities(stripslashes($reply_row['content'])); ?></div>
 		</top>
 		<bottom>
-		<div class="credit" align="right">posted by <span class="username"><?php echo $u_name; ?></div>		
+		<div class="credit" align="right">posted by <span class="username"><?php $reply_row['name']; ?></div>
+
+        <?php if( $_SESSION['user_level'] == ADMIN_USER ){ ?>
+
+            <a href=<?php echo "delete_reply.php?id=$reply_id" ?> ><span class='glyphicon glyphicon-remove'></span></a>
+
+        <?php } ?>
+
 		</bottom>
 	</div>
-</div>
+
 <?php } ?>
-			Reply :<br />
-			<form method="post" action="reply.php">
-			<input type="hidden" name="post-id" value=<?php echo $post_id; ?>  />
+            <div class='add-reply-div' >
+            <form method="post" action="reply.php">
+            <input type="hidden" name="post-id" value=<?php echo $post_id; ?>  />
             <textarea name="reply-content"></textarea>
-            <input type="submit" value="Reply" />
+            <input type="submit" class="btn btn-default reply-submit" value="Reply" />
             </form>
-		
-?>
-<?php                    
+            </div>
+<?php
                 }
             } 
             ?>
-            Add your post here(You need to be signed up):<br />
+            <div class='add-post-div' >
+            <b>Add your post here <?php if(!isset($_SESSION['signed_in'])) echo '(You need to login first):' ?></b><br />
             <form method="post" action="post.php">
-            <input type="hidden" name="cat-id" value=<?php echo $id; ?>  /><br/>
-            <textarea name="post-content"></textarea>
-            <input type="submit" value="Post" />
+                <input type="hidden" name="cat-id" value=<?php echo $id; ?>/><br/>
+                <textarea name="post-content"></textarea>
+                <input type="submit" class="btn btn-default post-submit" value="Post" />
             </form>
+            </div>
 <?php        }
     }
+}
+
+if( $_SESSION['user_level'] == ADMIN_USER ){
+
+    if(session_id()){
+        $_SESSION['orig_url'] = $_SERVER['REQUEST_URI'];
+    }
+
 }
 
 include 'footer.php';

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phpunit/phpunit": "^5.2",
+        "clef/clef-php": "1.0.1"
+    }
+}

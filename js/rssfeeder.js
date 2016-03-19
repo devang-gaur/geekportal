@@ -1,28 +1,30 @@
 //Setting up the AJAX loading GIF
+
 var article_heads;
 var content_divs=document.getElementsByClassName("accordion-section-content");
-for(var i=0;i<5;i++)
-content_divs[i].innerHTML= "<img src='img/loading.gif' />";
+
+for(var i=0 ; content_divs.length<5 ; i++)
+	content_divs[i].innerHTML= "<img src='img/loading.gif' />";
 
 //Function to get the feed
 function getFeed(the_site, index, callback, callback2,callback3)
-{
-    //var content_divs=document.getElementsByClassName("accordion-section-content");
-    
+{   
     if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
+    	xmlhttp=new XMLHttpRequest();
     }
     else
     {  // code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    	xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
     
     xmlhttp.onreadystatechange=function() {
         
-        if (xmlhttp.readyState==4 && xmlhttp .status==200) {
-          content_divs[index].innerHTML=xmlhttp.responseText;
-          callback(index,callback2,callback3);
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+        	
+        	content_divs[index].innerHTML=xmlhttp.responseText;
+        	callback(index,callback2,callback3);
+        
         }
     }
     
@@ -90,6 +92,8 @@ function popit(feeds,callback){
 //console.log(feeds.length);
 for(var i=0;i<feeds.length;i++){
     //console.log(feeds[i]);
+	feeds[i].setAttribute( "data-toggle" , "modal" );
+	feeds[i].setAttribute( "data-target" , "#myPopDiv" );
     feeds[i].onclick=function(){
         console.log("pressed");
         var href_str=this.getElementsByClassName("feed-link")[0].href;
@@ -102,6 +106,6 @@ for(var i=0;i<feeds.length;i++){
 
 function pop(str){
     $('#myPopDiv iframe').attr("src",str);
-    $('#myPopDiv').popup("open").attr("data-transition","Slide");
+    //$('#myPopDiv').popup("open").attr("data-transition","Slide");
     
 }

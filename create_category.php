@@ -1,22 +1,9 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-include 'header.php';
-include 'connect.php';
-/*
-<tr>
-    <td class="leftpart">
-        <h3><a href="category.php?id=">Category name</a></h3>
-    </td>
-    <td class="rightpart">
-        <a href="topic.php?id=">Topic subject</a> at 10-10
-    </td>
-</tr>
- */
+require 'config.php'
+require 'header.php';
+require_once 'connect.php';
+
 
 if($_SERVER['REQUEST_METHOD']!=POST)
 {

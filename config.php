@@ -2,14 +2,23 @@
 
 error_reporting(E_ERROR | E_PARSE);
 
-$config['server'] = ''; //Enter your server url . eg, localhost
+$config['server'] = 'localhost';
+//$server="ap-cdbr-azure-east-c.cloudapp.net";
 
-$config['db'] = ''; //Enter your dedicated database for the application
+$config['db'] = 'forumdb'; 
+//$database="DefaultMySQL";
 
-$config['user'] = '' ; //Enter the db admin password. Eg. 'root'
+$config['user'] = 'root' ;
+//$username="bd4d0820ca880e";
 
-$config['pass'] = ''; //Enter the db admin password .
+$config['pass'] = '';
+//$password="ce5fd6a6";
 
-$config['url'] = ''; //Enter the url of the project from root domain. Eg. /geekportal
+$config['url'] = '/geekportal';
 
 
+define( 'CLEF_ID' , 'c12a8d357a9f97f681a694f6dacbdd9d' );
+
+define( 'CLEF_SECRET' , '5da953baa5d5c59315c3fe03695523c8' );
+
+define( 'CLEF_URL' , 'http://localhost/geekportal/clef.php' );

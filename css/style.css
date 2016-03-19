@@ -1,160 +1,120 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
     Created on : Jul 24, 2015, 4:49:01 AM
     Author     : DEVANG GAUR
 */
 
 body{
-    background-color: green;
-    text-align : center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: white;
+    text-align: center;
+    
 }
 
 
 #wrapper{
-    width : 900px;
     margin : 0 auto;
+    height: auto;
 }
 
+input{
+    background: white;
+}
+
+
+.jumbotron {
+    background-image: url("/geekportal/img/geekbg.jpg");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: right;
+    text-align: left;
+/*    border : 2px solid grey;*/
+    font-family: 'lato' ;
+}
+
+#jumbo-cat {
+    background-image: none;
+    background-color: white;
+    text-align: center;
+/*    font-family: none ;*/
+    border: 0.5px solid #808080;
+    text-decoration-color: black;
+
+    padding: 0.5em 0.6em;
+    h1 {
+        font-size: 2em;
+    }
+    p {
+        font-size: 1.2em;
+        .btn {
+            padding: 0.5em;
+        }
+    }
+
+}
+
+
 #content{
-    background-color: #fff;
-    border : 1px solid #000;
-    float : left;
+    background: #F0F0F0;
+    border-radius: 10px;
+    /*border : 1px solid #000;*/
+    /*float : left;*/
     font-family: Arial;
     padding : 20px 30px;
     text-align: left;
-    width : 95%;
-    
+    width : 90%;
+
 }
 
 #header{
- width: 100%;
- background-color:  darkgreen;
- position: absolute;
- border:1px solid #000;
+ /* position: fixed;*/
+    background: #808080;
+    width: 100%;
+    top: 0px;
+    height: 50px;
+    border: 1px solid #CCC;
+
+
 }
 
 
-.menu{
-    float: left;
-    
-    border-bottom:none;
-    clear : both;
-    width : 95%;
-    //height :px;
-    padding :0 30px;
-    background-color: darkgreen;
-    color: white;
-    text-align: left;
-    font-size: 85%;
-    position: initial;
-    margin-bottom: 30px;
-}
-
-.menu h1{
-    color: white;
-}
-.menu a:hover{
-    background-color: forestgreen;
-}
-
-.menu #menubar ul li{
+#menu{
     display: inline-block;
-    list-style: none;
-    
 }
 
-#userbar{
-    background-color: #F0F0F0;
-    border-radius: 2px;
-    float: right;
-    font-size: 14px;
-    
-    color: darkgreen;
-    min-width: min-content;
-    border: #000 1px solid;
-    margin: 5px 20px 10px 5px;
+#user-menu{
+    color : white;
 }
 
-#userbar li{
-    color : darkgreen;
+
+#right-menu{
+    display: list-grid;
+}
+
+#menu li {
     list-style: none;
 }
 
-#userbar li:hover #user-choice{
-    background: #1a1a1a;
-    z-index:1;
-    opacity:1;
-}
 
-#user-choice{
-    border: #000 solid 2px;
-    width:160%;
-    padding:5px 0px;
-    position:absolute;
-    top:100%;
-    left:0px;
-    z-index:-1;
-    opacity:0;
-    transition:opacity linear 0.15s;
-    box-shadow:0px 2px 3px rgba(0,0,0,0.2);
-    background:#FFF;
-}
-
-#user-choice li{
-    list-style: none;
-    display: block;
-    font-size: 14px;
-}
-
-#user-choice li:hover{
-    background: #999999;
-}
-
-#user-choice li a {
-    padding:10px 30px;
-    display:block;
-}
- 
-
-#footer{
+#footer {
     clear: both;
+    padding: 3px 0 0 0;
+    width:100%;
+    background: rgba(0, 255, 0, 0.1);
+    position: initial;
+    bottom:0;
+    left:0;
 }
 
 
 /*  table styles */
-table{
-    border-collapse: collapse;
-    width: 100%;
-}
-
-table a{
-    color:#000;
-}
-
-table a:hover{
-    color :#000;
-}
-
-th{
-    background-color: green;
-    color: #F0F0F0;
-    text-align: center;
-}
-
-td{
-    padding: 5px;
-    text-align: center;
-}
 
 /* Begin font styles */
 
 h1{
     font-family: Arial;
-    color: forestgreen;
+    /*color: forestgreen;*/
 }
 
 h3{
@@ -169,13 +129,17 @@ h3{
     color: #FFF;
     font-family: Arial;
     padding : 3px;
-    
+
 }
 
+
+/* table leftpart */
 .leftpart{
     width: 70%;
 }
 
+
+/* table leftpart */
 .rightpart{
     width: 30%;
 }
@@ -184,19 +148,6 @@ h3{
     fontsize: 75%
 }
 
- #footer{
-    font-size: 65%;
-    padding: 3px 0 0 0;
-    width:100%;
-    height:100px;
-    background:darkgreen;
-    position: initial;
-    bottom:0;
-    left:0;
-    font-family: Arial;
-    color: white;
-
-}
 
 
 
@@ -217,7 +168,7 @@ textarea {
     width: 500px;
     height:200px;
     margin: 5px 5px 0px 0px;
-}  
+}
 input{
     alignment-adjust: central;
     background-color: #F0F0F0;
@@ -234,6 +185,11 @@ select{
     border-radius: 2px;
     width: 200px;
     margin: 5px 5px 30px 20px;
+}
+
+.dp-thumbnail{
+    max-height: 30px;
+    max-height: 30px;
 }
 
 .filler{

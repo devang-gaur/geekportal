@@ -1,12 +1,5 @@
 <?php
 
-require_once('../config.php');
-
-require_once('../utility.php');
-
-/**
-*
-*/
 class User
 {
     protected $conn = null ;
@@ -173,9 +166,7 @@ class User
 
 }
 
-/*
-var_dump($config);
-
+/* testing..
 $user = new User( $config );
 
 
@@ -196,4 +187,3 @@ $user->delete_user(
     
 echo "yay";
 */
-?>

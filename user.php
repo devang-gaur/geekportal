@@ -3,20 +3,20 @@ include 'header.php';
 include 'connect.php';
 $u_id=$_GET['id'];
 
-$query="SELECT user_dp from users WHERE user_id=$u_id";
+$query="SELECT dp from users WHERE id=$u_id";
 $res=  mysql_query($query) or die("Connection error probably...01");
 $row=  mysql_fetch_assoc($res);
-$user_dp_location=$row['user_dp'];
-$user_name=$row['user_name'];
+$user_dp_location=$row['dp'];
+$user_name=$row['name'];
 
-$posts_query="SELECT * FROM posts WHERE post_by=$u_id ORDER BY post_date DESC";
+$posts_query="SELECT * FROM posts WHERE posts.user =$u_id ORDER BY posts.date DESC";
 $posts_result=  mysql_query($posts_query) or die("Connection error probably...02");
 
 
-$upvote_query="SELECT SUM(upvotes) AS total_upvotes FROM posts WHERE post_by=$u_id";
-$downvote_query="SELECT SUM(downvotes) AS total_downvotes FROM posts WHERE post_by=$u_id";
-$topics_created_query="SELECT COUNT(*) AS total_topics FROM topics WHERE topic_by=$u_id";
-$posts_created_query="SELECT COUNT(*) AS total_posts FROM posts WHERE post_by=$u_id";
+$upvote_query="SELECT SUM(upvotes) AS total_upvotes FROM posts WHERE posts.user=$u_id";
+$downvote_query="SELECT SUM(downvotes) AS total_downvotes FROM posts WHERE posts.user=$u_id";
+$topics_created_query="SELECT COUNT(*) AS total_topics FROM topics WHERE topics.user=$u_id";
+$posts_created_query="SELECT COUNT(*) AS total_posts FROM posts WHERE posts.user=$u_id";
 
 $upvote_query_result=  mysql_query($upvote_query) or die("Connection error probably...03");
 $downvote_query_result=  mysql_query($downvote_query) or die("Connection error probably...04");;
@@ -53,22 +53,22 @@ $total_posts=$row_posts['total_posts'];
     }
     while($posts_row=  mysql_fetch_assoc($posts_result))
     {
-        $p_id=$posts_row['post_id'];
-        $p_topic=$posts_row['post_topic'];
-        $p_date=$posts_row['post_data'];
+        $p_id=$posts_row['id'];
+        $p_topic=$posts_row['topic'];
+        $p_date=$posts_row['date'];
         $p_content=htmlentities(stripslashes($posts_row['post_content']));
         
         
         
         
-        $t_query="SELECT topic_id,topic_subject,topic_by,topic_date FROM topics WHERE topics.topic_id=$p_topic";
+        $t_query="SELECT topics.id,topics.subject,topics.user,topics.date FROM topics WHERE topics.id=$p_topic";
         $t_result=  mysql_query($t_query);
         
         $row=mysql_fetch_assoc($result);
-        $created_by_id=$row['topic_by'];
-        $time = strtotime($row['topic_date']);
+        $created_by_id=$row['user'];
+        $time = strtotime($row['date']);
         $myFormatForView = date("m/d/y g:i A", $time);
-        $q="SELECT user_name from users where user_id=$created_by_id";
+        $q="SELECT name from users where users.id=$created_by_id";
         $r=  mysql_query($q);
         $rw=mysql_fetch_assoc($r);
         
@@ -105,7 +105,7 @@ $total_posts=$row_posts['total_posts'];
     </style>
         <div id='user-activity'>
             <div id="q-div">
-                <?php echo '<h5>'.$row['topic_subject'].'</h5><br />'.'Created by :'.$rw['user_name'].' at :'.$myFormatForView.'<hr />'; ?>
+                <?php echo '<h4>'.$row['topic_subject'].'</h4><br />'.'Created by :'.$rw['user_name'].' at :'.$myFormatForView.'<hr />'; ?>
             </div>
             <br /><br />
             <div class="post-div">

@@ -1,16 +1,12 @@
 <?php
-include 'header.php';
-include 'connect.php';
 
-function redirect($url)
-{
-    header('location:'.$url);
-    exit();
-}
- 
+require 'config.php';
+require 'header.php';
+require 'connect.php';
+
 if(!isset($_SESSION['signed_in']))
 {
-    echo "You are not signed in.";
+    echo "You need to <a href='sign_in.php' >sign in</a> first! ";
 }
 else 
 {

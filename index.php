@@ -5,9 +5,24 @@ include 'connect.php';
 
 <style>
 
+
+.cat-display:hover{
+    background: #808080;
+    color : white;
+}
+
 .cat-display, .topic-display{
+    border-radius: 30px;
     text-align: center;
     margin-top: 40px;
+}
+
+.cat-display a , .topic-display a {
+    color : black;
+}
+
+.topic-display a{
+    text-decoration: bold ;
 }
 
 .feed-description{
@@ -130,10 +145,11 @@ else
                 echo "<div class='row'>";
             }
 
+            $cat_id = $rows['id']
 ?>
 
     <div class="col-md-6 cat-display">
-        <h4><a href="category.php?id=<?php echo $rows['id']; ?>"><?php echo $rows['name']; ?></a></h4>
+        <h4><a href=<?php echo "category.php?id=$cat_id"; ?> > <?php echo $rows['name']; ?></a></h4>
         <?php echo $rows['description']; ?>
 
 
@@ -152,8 +168,14 @@ else
             $topic_row= mysql_fetch_assoc($topic_result);
             ?>
 
-            <a href="topic.php?id=<?php echo $topic_row['id']; ?>"><h5><?php echo $topic_row['subject']; ?></h5></a>(<?php echo $topic_row['date']; ?>)
-  <?php }
+            <a href="topic.php?id=<?php echo $topic_row['id']; ?>"><h5><?php echo $topic_row['subject']; ?></h5></a>(<?php echo $topic_row['date']; ?>) 
+
+<?php       if( $_SESSION['user_level']  == ADMIN_USER ){
+
+            ?>
+                <a href=<?php echo "delete_category.php?id=$cat_id"; ?> ><span class="glyphicon glyphicon-remove"></span></a>
+  <?php     }
+        }
             echo '</div><!-- column ends -->';
             if( ($row_ctr % 2) == 0 || ($row_ctr == $num_rows) ){
                 echo "</div> <!-- row ends -->";
@@ -170,5 +192,11 @@ else
 ?>
 
 <?php
+
+if ($_SESSION['user_level'] == ADMIN_USER ) {
+    if(session_id()){
+        $_SESSION['orig_url'] = $_SERVER['REQUEST_URI'];
+    }
+}
 include 'footer.php';
 ?>

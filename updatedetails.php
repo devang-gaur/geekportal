@@ -1,8 +1,14 @@
 <?php
-include 'header.php';
-include 'connect.php';
 
-if(!$_SESSION['signed_in']){
+require 'config.php';
+require 'utility.php';
+require 'connect.php';
+require 'header.php';
+
+
+
+//var_dump($_SESSION['signed_in']);
+if ( !isset($_SESSION['signed_in']) || !$_SESSION['signed_in'] ) {
     redirect('index.php');
 }
 
@@ -84,6 +90,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         background: white;
     }
 </style>
+
+<?php
+if( isset($_GET['err']) && $_GET['err'] ){
+    echo "<h4>Some error occured. Try again.</h4>";
+}
+?>
 
 <form>
 <input type='hidden' name='user-id' value=<?php echo $_SESSION['user_id']; ?> />

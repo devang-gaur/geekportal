@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    background: white;
+    text-align: center;
+}
+
+.wrapper{
+
+}
+
+.jumbotron {
+    background-image: url("/geekportal/img/geekbg.jpg");
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: right;
+    text-align: left;
+    border : 2px solid grey;
+    font-family: 'lato' ;
+}
+
+.content{
+    height: auto;
+}
+
+#header{
+	
+/*    position: fixed;*/
+    background: #f0f0f0;
+    width: 100%;
+    top: 0px;
+    height: 50px;
+    border: 1px solid #CCC;
+}
+
+/*
+.site-footer {
+    
+    clear: both;
+    padding: 3px 0 0 0;
+    width:100%;
+    background: rgba(0, 255, 0, 0.1);
+    bottom:0px;
+    left:0px;
+}
+*/
+
+#footer{
+	visibility : invisible;
+}
+    
+}
+
+#menu{
+    display: inline-block;
+}
+
+#right-menu{
+    display: list-grid;
+}
+
+#menu li {
+    list-style: none;
+}

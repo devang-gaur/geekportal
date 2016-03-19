@@ -24,6 +24,11 @@ class Topic
         }
     }
 
+    
+    function __destruct(){
+        $conn = null ;
+    }
+
 
 
 }
