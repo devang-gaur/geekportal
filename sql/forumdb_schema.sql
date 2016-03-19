@@ -1,6 +1,24 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 19, 2016 at 07:40 AM
+-- Server version: 5.7.9
+-- PHP Version: 5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `forumdb`
+--
 
 -- --------------------------------------------------------
 
@@ -48,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `posts` (
   KEY `post_topic` (`topic`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
-
 -- --------------------------------------------------------
 
 --
@@ -65,7 +82,9 @@ CREATE TABLE IF NOT EXISTS `replys` (
   PRIMARY KEY (`id`),
   KEY `post` (`post`),
   KEY `user` (`user`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
 
 -- --------------------------------------------------------
 
@@ -86,7 +105,6 @@ CREATE TABLE IF NOT EXISTS `topics` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 
-
 -- --------------------------------------------------------
 
 --
@@ -99,9 +117,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(30) NOT NULL,
   `pass` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `date` datetime NOT NULL,
-  `level` int(8) NOT NULL DEFAULT '1',
-  `dp` varchar(500) NOT NULL COMMENT 'stores the file location of the users display pic',
+  `level` int(8) NOT NULL DEFAULT '0',
+  `dp` text NOT NULL COMMENT 'stores the file location of the users display pic',
+  `signup` timestamp NOT NULL COMMENT 'timestamp for user signup datetime',
+  `last_signin` timestamp NULL DEFAULT NULL COMMENT 'timestamp to record user''s last login',
+  `last_signout` timestamp NULL DEFAULT NULL COMMENT 'timestamp to record user''s last logout',
+  `clef` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name_unique` (`name`),
   UNIQUE KEY `user_email` (`email`),
@@ -114,9 +135,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `user_date`, `user_level`, `user_dp`) VALUES
-(1, 'admin', '22d7fe8c185003c98f97e5d6ced420c7', 'admin@example.com', CURDATE() , 1, ''),
-(2, 'geek', 'c44a471bd78cc6c2fea32b9fe028d30a', 'geek@example.com', CURDATE(), 0, '');
+INSERT INTO `users` (`id`, `name`, `pass`, `email`, `level`, `dp`, `signup`, `last_signin`, `last_signout`, `clef`) VALUES
+(1, 'superuser', '5f4dcc3b5aa765d61d8327deb882cf99', 'superuser@example.com', 1, 'res/default_dp.jpg', 'CURRENT_TIMESTAMP()', NULL, NULL, NULL),
+(2, 'geek', '22d7fe8c185003c98f97e5d6ced420c7', 'geek@example.com', 0, 'res/default_dp.jpg', 'CURRENT_TIMESTAMP()', NULL, NULL, NULL);
 
 --
 -- Constraints for dumped tables
@@ -135,3 +156,7 @@ ALTER TABLE `posts`
 ALTER TABLE `topics`
   ADD CONSTRAINT `topics_ibfk_1` FOREIGN KEY (`cat`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `topics_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
