@@ -1,39 +1,19 @@
 <?php
-
+/*
 require_once('../config.php');
-//require_once('../connect.php');
-
+require_once('../connect.php');
+*/
+require_once('Model.php');
 /**
 *
 */
-class Reply
+class Reply extends Model
 {
-    protected $conn = null ;
-    
-    function __construct( $config )
-    {
-        try{
 
-            $conn = new PDO("mysql:host=".$config['server'].";dbname=".$config['db']."", $config['user'], $config['pass']);
-
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            echo "Success!";
-        } catch ( PDOException $e ) {
-            echo $e->getMessage();
-        }
-    }
-
-
-    function __destruct(){
-        $conn = null ;
+    function __construct( $config ) {
+        parent::__construct($config, 'replys');
     }
 
 }
 
-/*
-var_dump($config);
-$user = new Reply( $config );
-echo "yay";
-*/
 ?>

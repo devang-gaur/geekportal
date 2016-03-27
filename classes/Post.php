@@ -1,37 +1,32 @@
 <?php
-
+/*
 require_once('../config.php');
 require_once('../utility.php');
-/**
-*
 */
-class Post
+
+class Post extends Model
 {
-    protected $conn = null ;
-    
-    function __construct( $config )
-    {
-        try{
+    private $config 
 
-            $conn = new PDO("mysql:host=".$config['server'].";dbname=".$config['db']."", $config['user'], $config['pass']);
-
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            echo "Success!";
-        } catch ( PDOException $e ) {
-            echo $e->getMessage();
-        }
+    function __construct( $config ) {
+        parent::__construct($config, 'posts');
+        $this->config = $config;
     }
 
+    function delete_post( $params = array() , $param_op = 'AND' ) {
 
-    function __destruct(){
-        $conn = null ;
+        $posts = $this->select_record($params, array( 'id' ), $param_op );
+
+        $reply = new Reply($this->config);
+
+        foreach ($posts as $post) {
+            $reply->delete_record( array( 'post' => $post['id'] ));
+        }
+
+        $this->delete_record($params);
+
     }
 
 }
-/*
-var_dump($config);
-$user = new Post( $config );
-echo "yay";
-*/
+
 ?>

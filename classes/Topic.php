@@ -1,32 +1,35 @@
 <?php
 
 require_once('../config.php');
-//require_once('../connect.php');
+require_once('../connect.php');
 
 /**
 *
 */
-class Topic
+class Topic extends Model
 {
-    protected $conn = null ;
-    
+
+    private $config 
+
     function __construct( $config )
     {
-        try{
-
-            $conn = new PDO("mysql:host=".$config['server'].";dbname=".$config['db']."", $config['user'], $config['pass']);
-
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            echo "Success!";
-        } catch ( PDOException $e ) {
-            echo $e->getMessage();
-        }
+        parent::__construct( $config, 'topics' );
+        $this->config = $config;
     }
 
-    
-    function __destruct(){
-        $conn = null ;
+
+    function delete_topic( $params = array() , $param_op = 'AND' ) {
+
+        $topics = $this->select_record($params, array( 'id' ), $param_op );
+
+        $post = new Post( $this->config );
+
+        foreach ($topics as $topic) {
+            $post->delete_record( array( 'topic' => $topic['id'] ));
+        }
+
+        $this->delete_record($params);
+
     }
 
 
