@@ -16,6 +16,7 @@ $config['site_name'] = 'GreetTheGeeks'; //Change this name to your own site name
 
 $config['site_desc'] = 'Your daily doze of tech.'; //Change this description accordingly. Keep it small.
 
+$config['root'] = ''; //Location to your project directory eg., "C:\\wamp64\\www\\geekportal\\"
 
 define( CLEF_ID , '' ); // Enter your CLEF APP ID .
 
