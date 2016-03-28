@@ -29,7 +29,7 @@ An ideal site to start your day with!
 #####Admin capabilities (as of now) :
 
 * Creating new categories.
-* TODO
+* TODO (Working in progress)
     * Removing categories
     * Removing topics
     * Removing posts
@@ -42,3 +42,7 @@ An ideal site to start your day with!
 
 >"Don't judge me for the front-end . Rather, **improve** it !."
 
+
+###RESTful API (UPCOMNG)
+
+    [geekportal-api](https://github.com/dg711/geekportal-api/ "geekportal API")
