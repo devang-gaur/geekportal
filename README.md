@@ -25,6 +25,7 @@ An ideal site to start your day with!
 4.  Fill up the fields in config.php file.
 5.	Run your WAMP/LAMP/XAMPP and request "localhost/geekportal" on your browser . You made it.
 
+>"Don't judge me for the front-end . Rather, **improve** it !."
 
 #####Admin capabilities (as of now) :
 
@@ -39,8 +40,7 @@ An ideal site to start your day with!
 
 * Now users with a clef account can login using nice and quick two factor authentication. 
 * for that to work. Every account has been changed to have unique and valid email.
-
->"Don't judge me for the front-end . Rather, **improve** it !."
+* I created a login demo video : [Demo](https://www.youtube.com/watch?v=XKBjXogHxW8 "Clef Login demo")
 
 
 ###RESTful API (UPCOMNG)
