@@ -3,6 +3,10 @@
 A one-stop-shop for all the geeks . Get news feed from leading tech blogs and discuss along with them , about them.
 An ideal site to start your day with!
 
+####NOTE
+
+Migration from mysql procedural db api to PDO is under the process. So , you will find a mix of PDO calls and mysql_xyxyxy() calls in the code. The classes directorys contain all the model classes implemented using PDO.
+
 ###features
 
 * Get the latest ten articles from leading techblogs from various categories
